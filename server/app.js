@@ -32,6 +32,14 @@ app.use(bodyParser.json());
 const limiter = rateLimit({windowMs: 15*60*1000, max:3000});
 app.use(limiter);
 
+// Mongo DB Database Connection 
+let URI = "mongodb+srv://<username>:<password>@cluster0.ergjf.mongodb.net/task-manager"
+let OPTION = {user: 'testUser6666', pass: 'testUser6666', autoIndex: true}
+mongoose.connect(URI, OPTION, (error)=>{
+    console.log('DB Connection Success');
+    console.log(`Connection Error: ${error}`);
+})
+
 
 // Routing Implement
 app.use('/api/v1/', router);
