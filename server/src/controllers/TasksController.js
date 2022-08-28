@@ -46,3 +46,46 @@ exports.updateTaskStatus = (req, res) => {
         }
     })
 }
+
+// List Tasks by Status
+exports.taskListByStatus = (req, res) => {
+    let status = req.params.status;
+    let email=req.headers['email'];
+
+    TasksModel.aggregate([
+        {$match:{status:status, email:email}},
+        {$project:{
+            _id:1, title:1, description:1, status:1,
+            createdDate:{
+                $dateToString:{
+                    date: "$createDate",
+                    format:"%d-%m-%Y"
+                }
+            }
+        }}
+    ], (error, data) => {
+        if(error){
+            res.status(400).json({status: "Failed", data:error})
+        }
+        else{
+            res.status(200).json({status:"Success", data:data})
+        }
+    })
+}
+
+
+// Status Count
+exports.taskStatusCount = (req, res) => {
+    let email = req.headers['email'];
+    TasksModel.aggregate([
+        {$match: {email:email}},
+        {$group:{_id:"$status",sum:{$count:{}}}}
+    ], (error, data) => {
+        if(error){
+            res.status(400).json({status: "Failed", data:error})
+        }
+        else{
+            res.status(200).json({status:"Success", data:data})
+        }
+    })
+}
