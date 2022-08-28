@@ -38,3 +38,18 @@ exports.login = (req, res) => {
     }
     )
 }
+
+// User Profile Update
+exports.profileUpdate = (req, res) => {
+    let email = req.headers['email'];
+    let reqBody = req.body;
+
+    UsersModel.updateOne({email: email}, reqBody, (error, data) => {
+        if(error){
+            res.status(400).json({status: 'Update fail', data:error})
+        }
+        else{
+            res.status(200).json({status: 'Update success', data:data})
+        }
+    })
+}
