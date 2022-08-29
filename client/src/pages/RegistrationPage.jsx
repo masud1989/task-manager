@@ -6,11 +6,9 @@ const Registration = lazy( ()=> import('../components/Registration/Registration'
 const RegistrationPage = () => {
     return (
         <Fragment>
-            <MasterLayout>
-                <Suspense fallback={<LazyLoader/>}>
-                    <Registration />
-                </Suspense>
-            </MasterLayout>
+            <Suspense fallback={<LazyLoader/>}>
+                <Registration />
+            </Suspense>
         </Fragment>
     );
 };
