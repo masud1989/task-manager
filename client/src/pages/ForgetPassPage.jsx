@@ -1,18 +1,18 @@
 import React, { Fragment, lazy, Suspense } from 'react';
 import LazyLoader from '../components/MasterLayout/LazyLoader';
 import MasterLayout from '../components/MasterLayout/MasterLayout';
-const Registration = lazy( ()=> import('../components/Registration/Registration') )
+const ForgetPass = lazy( ()=> import('../components/ForgetPass/ForgetPass') )
 
-const RegistrationPage = () => {
+const ForgetPassPage = () => {
     return (
         <Fragment>
             <MasterLayout>
-                <Suspense fallback={<LazyLoader/>}>
-                    <Registration />
+                <Suspense fallback={<LazyLoader />}>
+                    <ForgetPass />
                 </Suspense>
             </MasterLayout>
         </Fragment>
     );
 };
 
-export default RegistrationPage;
+export default ForgetPassPage;
