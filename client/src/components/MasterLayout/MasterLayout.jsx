@@ -39,7 +39,7 @@ const MasterLayout = (props) => {
             <Navbar  className="fixed-top px-0 shadow-sm ">
                 <Container fluid={true}>
                     <Navbar.Brand >
-                        <a className="icon-nav m-0 h5 me-5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/><span className="ms-2 fw-bold text-secondary font-large">Task Management Project</span></a>
+                        <a className="icon-nav m-0 h5 me-5" onClick={MenuBarClickHandler}><AiOutlineMenuUnfold/><span className="ms-2 fw-bold text-primary font-large">Task Management Project</span></a>
                         {/* <img className="nav-logo mx-2 ps-5"  src={logo} alt="logo"/> */}
                     </Navbar.Brand>
 
@@ -78,7 +78,7 @@ const MasterLayout = (props) => {
                     <span className="side-bar-item-caption">Create New</span>
                 </NavLink>
 
-                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/all" >
+                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/new" >
                     <BsListNested className="side-bar-item-icon" />
                     <span className="side-bar-item-caption">New Task</span>
                 </NavLink>
