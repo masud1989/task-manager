@@ -2,8 +2,9 @@ import React, { Fragment, useRef } from 'react';
 import { AiFillCalendar, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import {Container} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { ErrorToast, IsEmpty } from '../../helper/FormHelper';
+import { ErrorToast, IsEmpty, SuccessToast } from '../../helper/FormHelper';
 import { CreateTaskRequest } from '../../apiRequest/apiRequest';
+import { ToastContainer } from 'react-toastify';
 
 const Create = () => {
     let titleRef, descriptionRef = useRef();
@@ -25,6 +26,7 @@ const Create = () => {
             CreateTaskRequest(title,description).then((result)=>{
                 if(result === true){
                     navigate('/new')
+                    // SuccessToast("New Task Created")
                 }
             })
         }
@@ -53,9 +55,10 @@ const Create = () => {
                         </div>
                     </div>
                 </div>
-
+                {/* <ToastContainer/> */}
             </div>
         </div>
+        
     );
 };
 

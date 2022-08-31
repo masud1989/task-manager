@@ -2,11 +2,15 @@ import React, { Fragment, useEffect } from 'react';
 import { AiFillCalendar, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { Container } from 'react-bootstrap';
 import { TaskListByStatus } from '../../apiRequest/apiRequest';
+import { useSelector } from 'react-redux';
 
 const New = () => {
+
     useEffect( ()=>{
         TaskListByStatus("New")
     }, [])
+
+    const NewTaskList = useSelector((state)=>state.task.New)
 
     return (
         <Fragment>
@@ -27,8 +31,10 @@ const New = () => {
                     </div>
                 </div>
                 <div className="row">
-             
-                        <div  className="col-12 col-lg-3 col-sm-6 col-md-4  p-2 m-3">
+
+                    {
+                        NewTaskList.map((item, i) => 
+                        <div key={i.toString()} className="col-12 col-lg-3 col-sm-6 col-md-4  p-2 m-3">
                             <div className="card h-100">
                                 <div className="card-body">
                                     {/* <h5 className="animated fadeInUp">Total Progress </h5> */}
@@ -43,7 +49,10 @@ const New = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>                
+                        </div>   
+                     )
+                    }
+
                 </div>
         </Container>
     </Fragment>
