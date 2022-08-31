@@ -1,8 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {Container} from 'react-bootstrap';
 import { AiFillCalendar, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { TaskListByStatus } from '../../apiRequest/apiRequest';
 
 const Completed = () => {
+
+    useEffect( ()=>{
+        TaskListByStatus("Completed")
+    }, [])
+
     return (
         <Fragment>
         <Container fluid={true} className="content-body">

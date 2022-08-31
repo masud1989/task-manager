@@ -2,6 +2,7 @@ import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { getToken, setToken, setUserDetails } from "../helper/SessionHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
+import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/task-slice";
 import store from "../redux/store/store";
 
 const BaseURL = 'http://localhost:5000/api/v1';
@@ -93,4 +94,34 @@ export const CreateTaskRequest = (title, description) =>{
         store.dispatch(HideLoader())
         return false;
     })
-} 
+}
+
+// Task ListByStatus Request
+export const TaskListByStatus = (status)=>{
+    store.dispatch(ShowLoader())
+    let URL = BaseURL+"/taskListByStatus/"+status;
+    axios.get(URL,AxiosHeader).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            if(status === 'New'){
+                store.dispatch(SetNewTask(res.data['data']))
+            }
+            else if(status === 'Progress'){
+                store.dispatch(SetProgressTask(res.data['data']))
+            }
+            else if(status === 'Completed'){
+                store.dispatch(SetCompletedTask(res.data['data']))
+            }
+            else if(status === 'Canceled'){
+                store.dispatch(SetCanceledTask(res.data['data']))
+            }
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+        }
+    }).catch((err)=>{
+        ErrorToast('Something Went Wrong from catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+}
