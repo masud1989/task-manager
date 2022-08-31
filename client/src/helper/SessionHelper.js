@@ -1,14 +1,17 @@
 class SessionHelper{
     setToken(token){
-        localStorage.setItem("token", token)
+        return localStorage.setItem("token", token)
     }
 
     getToken(){
         return localStorage.getItem("token")
     }
 
+    getToken(){
+        return localStorage.getItem("token")
+    } 
     setUserDetails(userDetails){
-        localStorage.setItem('userDetails', JSON.stringify( userDetails))
+        return localStorage.setItem('userDetails', JSON.stringify( userDetails))
     }
 
     getUserDetails(){
