@@ -21,8 +21,7 @@ const Login = () => {
             LoginRequest(email,password).then((result)=>{
                 if(result === true){
                     SuccessToast('Login Success')
-                    window.location.href='/'
-                    
+                    window.location.href='/' 
                 }
             })
         }

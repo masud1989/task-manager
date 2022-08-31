@@ -14,7 +14,6 @@ import FullScreenLoader from "./components/MasterLayout/FullScreenLoader";
 import { getToken } from "./helper/SessionHelper";
 
 
-
 function App() {
   if(getToken()){
     return (

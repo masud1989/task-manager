@@ -1,11 +1,13 @@
 import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
-import { setToken, setUserDetails } from "../helper/SessionHelper";
+import { getToken, setToken, setUserDetails } from "../helper/SessionHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
 import store from "../redux/store/store";
 
 const BaseURL = 'http://localhost:5000/api/v1';
+const AxiosHeader = {headers:{"token":getToken()}}
 
+// Registration Request 
 export const RegistrationRequest = (email, name, address, mobile, password, photo) => {
     store.dispatch(ShowLoader())
     let URL = BaseURL+"/registration";
@@ -42,7 +44,7 @@ export const RegistrationRequest = (email, name, address, mobile, password, phot
     })
 
 }
-
+//Login Request
 export const LoginRequest = (email, password) => {
     store.dispatch(ShowLoader())
 
@@ -68,3 +70,27 @@ export const LoginRequest = (email, password) => {
     })
 
 }
+
+// Create Task Request
+export const CreateTaskRequest = (title, description) =>{
+    store.dispatch(ShowLoader())
+    let URL = BaseURL+"/createTask";
+    let postBody = {"title":title, "description":description, "status":"New"}
+
+    return axios.post(URL,postBody,AxiosHeader).then((res)=>{
+        if(res.status === 200){
+            SuccessToast('New Task Created Successful')
+            store.dispatch(HideLoader())
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            store.dispatch(HideLoader())
+            return false;
+        }
+    }).catch((err)=>{
+        ErrorToast('Something Went Wrong from catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+} 
