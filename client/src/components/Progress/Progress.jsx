@@ -1,13 +1,27 @@
 import React, { Fragment, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { AiFillCalendar, AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { TaskListByStatus } from '../../apiRequest/apiRequest';
+import DeleteAlert from '../../helper/DeleteAlert';
 
 const Progress = () => {
 
     useEffect( ()=>{
         TaskListByStatus("Progress")
     }, [])
+
+    const NewProgressList = useSelector((state)=>state.task.Progress)
+
+    //Delete Function
+      const handleDeleteItem = (id) => {
+        DeleteAlert(id).then((result) => {
+            if(result === true){
+                TaskListByStatus("Progress")
+            }
+        })
+    }
 
     return (
         <Fragment>
@@ -28,24 +42,28 @@ const Progress = () => {
                     </div>
                 </div>
                 <div className="row">
-             
-                        <div  className="col-12 col-lg-3 col-sm-6 col-md-4  p-2 m-3">
+                {
+                    NewProgressList.map((task, i) =>
+                        <div key={i.toString()} className="col-12 col-lg-3 col-sm-6 col-md-3  p-2">
                             <div className="card h-100">
                                 <div className="card-body">
                                     {/* <h5 className="animated fadeInUp">Total Progress </h5> */}
                                     {/* <h6 className="text-secondary animated fadeInUp">55</h6> */}
-                                    <h4 className="animated fadeInUp">Title</h4>
-                                    <p className="animated fadeInUp">Description</p>
+                                    <h4 className="animated fadeInUp">{task.title}</h4>
+                                    <p className="animated fadeInUp">{task.escription}</p>
                                     <p className="m-0 animated fadeInUp p-0">
-                                        <AiFillCalendar/>22/02/2022
+                                        <AiFillCalendar/>{task.createdDate}
                                         <a className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
-                                        <a className="icon-nav text-danger mx-1"><AiOutlineDelete /></a>
-                                        <a className="badge float-end bg-primary">Status</a>
+                                        <a onClick={handleDeleteItem.bind(this,task._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete /></a>
+                                        <a className="badge float-end bg-primary">{task.status}</a>
                                     </p>
                                 </div>
                             </div>
-                        </div>                
+                        </div>
+                    )
+                }             
                 </div>
+                <ToastContainer />
         </Container>
         </Fragment>
     );

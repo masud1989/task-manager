@@ -2,6 +2,7 @@ import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { getToken, setToken, setUserDetails } from "../helper/SessionHelper";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
+import { SetSummary } from "../redux/state-slice/summary-slice";
 import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/task-slice";
 import store from "../redux/store/store";
 
@@ -124,4 +125,46 @@ export const TaskListByStatus = (status)=>{
         store.dispatch(HideLoader())
         return false;
     })
+}
+
+// Task Summary Request
+export const SummaryRequest = ()=>{
+    store.dispatch(ShowLoader())
+    let URL =BaseURL+"/taskStatusCount";
+    axios.get(URL, AxiosHeader).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            store.dispatch(SetSummary(res.data['data']))
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+        }
+    }).catch((err)=>{
+        ErrorToast("Something Went Wrong-Catch")
+    })
+}
+
+//Delete Request
+export const DeleteRequest = (id) => {
+    store.dispatch(ShowLoader())
+    // let URL =BaseURL+"/deleteTask/"+id;
+    const URL = BaseURL+"/deleteTask/"+id;
+    // let URL =BaseURL+"/taskStatusCount";
+    return axios.get(URL,AxiosHeader).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            SuccessToast('Task Deleted Success')
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((error) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+
 }
