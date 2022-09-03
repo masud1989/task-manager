@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "2926f88b-4cc8-45f0-a96c-b4bed6dd2ef3",
+		"name": "task-manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"email\": \"mranasrj01@gmail.com\",\r\n      \"password\": \"1234\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BaseURL}}/login",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"mranasrj01@gmail.com\",\r\n    \"name\": \"Masud Rana\",\r\n    \"address\": \"Gojaria, Sirajganj\",\r\n    \"mobile\": \"01710798318\",\r\n    \"password\": \"1234\",\r\n    \"photo\":\"data:image/jpeg;base64,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\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/registration",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profileUpdate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Masud Rana\",\r\n    \"address\": \"Gojaria, Sirajganj\",\r\n    \"mobile\": \"01710000000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/profileUpdate",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"profileUpdate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "task",
+			"item": [
+				{
+					"name": "createTask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Task\",\r\n    \"description\": \"Test Task description\",\r\n    \"status\": \"New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/createTask",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"createTask"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTask",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/deleteTask/630b28c26ebcd0ce5bf4da9a",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"deleteTask",
+								"630b28c26ebcd0ce5bf4da9a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTaskStatus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Task\",\r\n    \"description\": \"Test Task description\",\r\n    \"status\": \"New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/updateTaskStatus/630b28c96ebcd0ce5bf4dab0/Calcelled",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"updateTaskStatus",
+								"630b28c96ebcd0ce5bf4dab0",
+								"Calcelled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "taskListByStatus",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Task\",\r\n    \"description\": \"Test Task description\",\r\n    \"status\": \"New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/taskListByStatus/Calcelled",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"taskListByStatus",
+								"Calcelled"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "taskStatusCount",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Test Task\",\r\n    \"description\": \"Test Task description\",\r\n    \"status\": \"New\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseURL}}/taskStatusCount",
+							"host": [
+								"{{BaseURL}}"
+							],
+							"path": [
+								"taskStatusCount"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseURL",
+			"value": "http://localhost:5000/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjE2OTQ0NTQsImRhdGEiOiJtcmFuYXNyajAxQGdtYWlsLmNvbSIsImlhdCI6MTY2MTY2MzM1MH0.3cf4CZhPs53WO40DmoZq2YBmRfuusVJ6BZu44IUBi50",
+			"type": "default"
+		}
+	]
+}

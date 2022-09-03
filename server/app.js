@@ -17,6 +17,7 @@ const mongoose = require('mongoose');
 
 // Security Middleware Lib implement
 app.use(cors());
+app.use(express.json())
 app.use(helmet());
 app.use(mongoSanitize());
 app.use(xss());

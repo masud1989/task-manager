@@ -58,7 +58,7 @@ exports.taskListByStatus = (req, res) => {
             _id:1, title:1, description:1, status:1,
             createdDate:{
                 $dateToString:{
-                    date: "$createDate",
+                    date: "$createdDate",
                     format:"%d-%m-%Y"
                 }
             }

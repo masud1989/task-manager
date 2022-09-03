@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { TaskListByStatus } from '../../apiRequest/apiRequest';
 import DeleteAlert from '../../helper/DeleteAlert';
+import updateAlert from '../../helper/UpdateAlert';
 
 
 const Cancelled = () => {
@@ -24,6 +25,16 @@ const Cancelled = () => {
             }
         })
     }
+
+    // Status Change
+    const handleChangeStatusItem = (id, status) => {
+        updateAlert(id, status).then((res)=>{
+            if(res === true){
+            TaskListByStatus("Canceled")
+         }
+        })
+     }
+ 
 
     return (
         <Fragment>
@@ -55,7 +66,7 @@ const Cancelled = () => {
                                     <p className="animated fadeInUp">{task.description}</p>
                                     <p className="m-0 animated fadeInUp p-0">
                                         <AiFillCalendar/>{task.createdDate}
-                                        <a className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
+                                        <a onClick={handleChangeStatusItem.bind(this,task._id, task.status)} className="icon-nav text-primary mx-1"><AiOutlineEdit /></a>
                                         <a onClick={handleDeleteItem.bind(this,task._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete /></a>
                                         <a className="badge float-end bg-danger">{task.status}</a>
                                     </p>

@@ -6,6 +6,7 @@ import { BsListNested } from "react-icons/bs";
 import { GrInProgress } from "react-icons/gr";
 import { ImCancelCircle } from "react-icons/im";
 import logo from "../../assets/images/logo.svg";
+import { removeSession } from "../../helper/SessionHelper";
 // import { getUserDetails, removeSession } from "../../helpers/SessionHelper";
 
 
@@ -15,7 +16,7 @@ const MasterLayout = (props) => {
     let contentRef, sideNavRef = useRef();
 
     const logout=()=>{
-        // removeSession();
+        removeSession();
     }
 
     const MenuBarClickHandler = () => {
@@ -58,7 +59,7 @@ const MasterLayout = (props) => {
                                 </NavLink>
                                 <a onClick={logout}  className="side-bar-item">
                                     <AiOutlineLogout className="side-bar-item-icon" />
-                                    <span className="side-bar-item-caption">Logout</span>
+                                    <span  className="side-bar-item-caption">Logout</span>
                                 </a>
                             </div>
                         </div>

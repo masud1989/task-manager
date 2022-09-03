@@ -147,9 +147,7 @@ export const SummaryRequest = ()=>{
 //Delete Request
 export const DeleteRequest = (id) => {
     store.dispatch(ShowLoader())
-    // let URL =BaseURL+"/deleteTask/"+id;
     const URL = BaseURL+"/deleteTask/"+id;
-    // let URL =BaseURL+"/taskStatusCount";
     return axios.get(URL,AxiosHeader).then((res) => {
         store.dispatch(HideLoader())
         if(res.status === 200){
@@ -162,6 +160,30 @@ export const DeleteRequest = (id) => {
         }
 
     }).catch((error) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+
+}
+
+
+//Update Status Request
+export const UpdateStatusRequest = (id, status) => {
+    store.dispatch(ShowLoader())
+    const URL = BaseURL+"/updateTaskStatus/"+id+"/"+status;
+     axios.get(URL,AxiosHeader).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            SuccessToast('Task Status Update Success')
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((err) => {
         ErrorToast('Something Went Wrong catch')
         store.dispatch(HideLoader())
         return false;
