@@ -6,7 +6,7 @@ import { BsListNested } from "react-icons/bs";
 import { GrInProgress } from "react-icons/gr";
 import { ImCancelCircle } from "react-icons/im";
 import logo from "../../assets/images/logo.svg";
-import { removeSession } from "../../helper/SessionHelper";
+import { getUserDetails, removeSession } from "../../helper/SessionHelper";
 // import { getUserDetails, removeSession } from "../../helpers/SessionHelper";
 
 
@@ -46,11 +46,11 @@ const MasterLayout = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            <img className="icon-nav-img icon-nav" src={logo} alt=""/>
+                            <img className="icon-nav-img icon-nav" src={getUserDetails()['photo']} alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    <img className="icon-nav-img" src={logo} alt=""/>
-                                    <h6> User Name </h6>
+                                    <img className="icon-nav-img" src={getUserDetails()['photo']} alt=""/>
+                                    <h6> {getUserDetails()['name']} </h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
                                 <NavLink to="/profileDetails" className="side-bar-item">
