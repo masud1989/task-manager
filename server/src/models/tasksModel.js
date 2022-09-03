@@ -5,6 +5,7 @@ const DataSchema = mongoose.Schema({
     description: {type: String},
     status:{type:String},
     email: {type: String},
+    photo:{type: String},
     createdDate: {type: Date, default:Date.now()}
 },
 {versionKey: false})

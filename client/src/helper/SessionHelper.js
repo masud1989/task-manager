@@ -7,9 +7,6 @@ class SessionHelper{
         return localStorage.getItem("token")
     }
 
-    getToken(){
-        return localStorage.getItem("token")
-    } 
     setUserDetails(userDetails){
         return localStorage.setItem('userDetails', JSON.stringify( userDetails))
     }
