@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registration, login, profileUpdate } = require('../controllers/UsersController');
+const { registration, login, profileUpdate, profileDetails } = require('../controllers/UsersController');
 const { createTask, updateTaskStatus, taskListByStatus, taskStatusCount, deleteTask } = require('../controllers/TasksController');
 
 const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
@@ -14,6 +14,8 @@ router.post('/login', login);
 
 // Routes with middleware
 router.post('/profileUpdate', AuthVerifyMiddleware, profileUpdate);
+router.get('/profileDetails', AuthVerifyMiddleware, profileDetails);
+
 router.post('/createTask', AuthVerifyMiddleware, createTask);
 router.get('/deleteTask/:id', AuthVerifyMiddleware, deleteTask);
 router.get('/updateTaskStatus/:id/:status', AuthVerifyMiddleware, updateTaskStatus);

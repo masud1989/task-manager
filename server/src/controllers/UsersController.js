@@ -53,3 +53,20 @@ exports.profileUpdate = (req, res) => {
         }
     })
 }
+
+//User Profile Details
+exports.profileDetails = (req, res) => {
+    let email = req.headers['email'];
+
+    UsersModel.aggregate([
+        {$match:{email:email}},
+        {$project:{_id:1, email:1, name:1, address:1, mobile:1, photo:1 }}
+    ], (err,data)=> {
+        if(err){
+            res.status(400).json({status:'Failed', data:err})
+        }
+        else{
+            res.status(200).json({status:'Success', data:data})
+        }
+    })
+}
