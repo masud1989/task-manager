@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
 import { getToken, setToken, setUserDetails } from "../helper/SessionHelper";
+import { SetProfile } from "../redux/state-slice/profileSlice";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
 import { SetSummary } from "../redux/state-slice/summary-slice";
 import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/task-slice";
@@ -185,6 +186,57 @@ export const UpdateStatusRequest = (id, status) => {
 
     }).catch((err) => {
         ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+
+}
+
+//Get Profile Request
+export const ProfileDetailsRequest = () => {
+    store.dispatch(ShowLoader())
+    const URL = BaseURL+"/profileDetails";
+    return axios.get(URL, AxiosHeader).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            store.dispatch(SetProfile(res.data['data'][0]))
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((err) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+}
+
+// Registration Request 
+export const ProfileUpdateRequest = (email, name, address, mobile, password, photo) => {
+    store.dispatch(ShowLoader())
+    let URL = BaseURL+"/profileUpdate";
+    let PostBody = { "email":email, "name":name, "address":address, "mobile":mobile, "password":password, "photo":photo }
+    let UserDetails = { "email":email, "name":name, "address":address, "mobile":mobile, "photo":photo  }
+    return axios.post(URL, PostBody, AxiosHeader).then((res)=>{
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            SuccessToast('Profile Updated Success')
+            setUserDetails(UserDetails)
+            return true
+            }
+            
+        else{
+            ErrorToast("Something Went Wrong-2")
+            return false;
+        }
+
+
+    }).catch((error)=>{
+        ErrorToast("Something Went Wrong from Catch-3")
+        
         store.dispatch(HideLoader())
         return false;
     })
