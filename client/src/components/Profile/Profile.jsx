@@ -61,7 +61,7 @@ const Profile = () => {
 
     return (
         <div className="container">
-            <h4 className='ms-5 mb-5 text-primary'>Profile Details</h4>
+            <h4 className='ms-5 mb-3 text-primary'>Profile Details</h4>
             <div className="row d-flex justify-content-center">
                 <div className="col-md-12">
                     <div className="card">
