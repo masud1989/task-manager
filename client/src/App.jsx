@@ -12,6 +12,9 @@ import NewPage from "./pages/NewPage";
 import CreatePage from "./pages/CreatePage";
 import FullScreenLoader from "./components/MasterLayout/FullScreenLoader";
 import { getToken } from "./helper/SessionHelper";
+import CreatePasswordPage from "./pages/AccountRecover/CreatePasswordPage";
+import SendOTPPage from "./pages/AccountRecover/SentOTPPage";
+import VerifyOTPPage from "./pages/AccountRecover/VerifyOTPPage";
 
 
 function App() {
@@ -37,10 +40,12 @@ function App() {
     return (
       <Fragment>
         <Routes>
-         
           <Route path="/" element={<Navigate to="/Login" replace />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegistrationPage />} />
+          <Route path="/sendOTP" element={<SendOTPPage />} />
+          <Route path="/verifyOTP" element={<VerifyOTPPage />} />
+          <Route path="/createPassword" element={<CreatePasswordPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <FullScreenLoader />

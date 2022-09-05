@@ -225,7 +225,7 @@ export const ProfileUpdateRequest = (email, name, address, mobile, password, pho
         if(res.status === 200){
             SuccessToast('Profile Updated Success')
             setUserDetails(UserDetails)
-            return true
+            return true;                                                                                     
             }
             
         else{
@@ -241,4 +241,73 @@ export const ProfileUpdateRequest = (email, name, address, mobile, password, pho
         return false;
     })
 
+}
+
+// Verify Email Request (Email)
+export const RecoverVerifyEmailRequest = (email) => {
+    store.dispatch(ShowLoader())
+    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email;
+    return axios.get(URL).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            //Messages
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((err) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+}
+
+// Verify Email Request (OTP)
+export const RecoverVerifyOTPRequest = (email,OTP) => {
+    store.dispatch(ShowLoader())
+    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email+"/"+OTP;
+    return axios.get(URL).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            //Messages
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((err) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
+}
+
+// Recover Reset Password Request
+export const RecoverResetPasswordRequest = (email,OTP,password) => {
+    store.dispatch(ShowLoader())
+
+
+    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email+"/"+OTP;
+    let postBody = {email:email, OTP:OTP, password:password}
+    return axios.post(URL, postBody).then((res) => {
+        store.dispatch(HideLoader())
+        if(res.status === 200){
+            //Messages
+            return true;
+        }
+        else{
+            ErrorToast('Something Went Wrong')
+            return false;
+        }
+
+    }).catch((err) => {
+        ErrorToast('Something Went Wrong catch')
+        store.dispatch(HideLoader())
+        return false;
+    })
 }
