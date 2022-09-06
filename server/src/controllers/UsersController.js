@@ -1,5 +1,7 @@
 const UsersModel = require('../models/usersModel');
 const jwt = require('jsonwebtoken');
+const SendEmailUtility = require('../utilities/SendEmailUtility');
+
 
 // User Registration 
 exports.registration = (req, res) => {
@@ -69,4 +71,30 @@ exports.profileDetails = (req, res) => {
             res.status(200).json({status:'Success', data:data})
         }
     })
+}
+
+exports.recoverVerifyEmail = async (req,res) => {
+    let email = req.params.email;
+    let OTPCode = Math.floor(100000 + Math.random() * 900000)
+    try {
+        //Email Account verify
+        let userCount = (await UsersModel.aggregate([{$match:{email: email}}, {$count: "total"}]))
+        if(userCount.length>0){
+            //OTP Insert
+            let createOTP = await OTPModel.create({email: email, otp:OTPCode})
+            let sendMail = await SendEmailUtility(email, "Your PIN Code is="+OTPCode, "Task Manager PIN Verification")
+            //Email Send
+            res.status(200).json({status:'Success', data:sendMail})
+        }
+        else{
+            res.status(200).json({status: 'fail', data:'User is Not Found'})
+        }
+
+
+
+    
+    } catch (error) {
+        res.status(200).json({status: 'fail', data:error})
+    }
+    
 }
