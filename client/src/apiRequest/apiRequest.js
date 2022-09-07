@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
-import { getToken, setEmail, setToken, setUserDetails } from "../helper/SessionHelper";
+import { getToken, setEmail, setOTP, setToken, setUserDetails } from "../helper/SessionHelper";
 import { SetProfile } from "../redux/state-slice/profileSlice";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
 import { SetSummary } from "../redux/state-slice/summary-slice";
@@ -304,17 +304,26 @@ export const RecoverVerifyOTPRequest = (email,OTP) => {
 }
 
 // Recover Reset Password Request
-export const RecoverResetPasswordRequest = (email,OTP,password) => {
+export const RecoverResetPasswordRequest = (email,otp,password) => {
     store.dispatch(ShowLoader())
 
 
-    let URL = BaseURL+"/recoverResetPass/"+email+"/"+OTP;
-    let postBody = {email:email, OTP:OTP, password:password}
+    let URL = BaseURL+"/recoverResetPass";
+    let postBody = {email:email, otp:otp, password:password}
     return axios.post(URL, postBody).then((res) => {
         store.dispatch(HideLoader())
         if(res.status === 200){
             //Messages
-            return true;
+            if(res.data['status'] === 'fail'){
+                ErrorToast(res.data['data']);
+                return false;
+            }
+            else{
+                setOTP(otp)
+                SuccessToast("Password Reset Successful")
+                return true;
+            }
+            
         }
         else{
             ErrorToast('Something Went Wrong')

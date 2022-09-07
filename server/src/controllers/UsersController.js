@@ -129,18 +129,18 @@ exports.recoverVerifyOTP = async (req, res) => {
 // Recover Reset Password Request
 exports.recoverResetPass = async (req, res) => {
     let email = req.body['email'];
-    let OTPCode = req.body['otp'];
+    let OTPCode = req.body['OTP'];
     let newPassword = req.body['password'];
     let updateStatus = 1;
 
     try {
-        let OTPUsedCount = await OTPModel.aggregate([{$match:{email: email, otp:OTPCode, status:updateStatus}},{$count: "total"}])
+        let OTPUsedCount = await OTPModel.aggregate([{$match: {email: email, otp: OTPCode, status: updateStatus}}, {$count: "total"}])
         if(OTPUsedCount.length>0){
             let updatePassword = await UsersModel.updateOne({email:email}, {password: newPassword})
-            res.status(200).json({status: 'success', data:updatePassword})
+            res.status(200).json({status: "success", data:updatePassword})
         }
         else{
-            res.status(200).json({status: 'fail', data:"Invalid OTP Code"})
+            res.status(200).json({status: "fail", data:"Invalid OTP Code"})    
         }
     } catch (error) {
         res.status(200).json({status: 'fail', data:error})

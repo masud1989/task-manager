@@ -1,11 +1,14 @@
 import React, { Fragment } from 'react';
 import { useRef } from 'react';
-import { getEmail } from '../../helper/SessionHelper';
+import { getEmail, getOTP } from '../../helper/SessionHelper';
 import { ErrorToast, IsEmpty } from '../../helper/FormHelper';
 import { RecoverResetPasswordRequest } from '../../apiRequest/apiRequest';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const CreatePassword = () => {
         let passwordRef, confirmPasswordRef = useRef();
+        const navigate = useNavigate();
 
         const ResetPass = () => {
             let password = passwordRef.value;
@@ -21,8 +24,10 @@ const CreatePassword = () => {
                 ErrorToast('Password & Confirm Password Field is not Matched')
             }
             else{
-                RecoverResetPasswordRequest().then((res)=>{
-
+                RecoverResetPasswordRequest(getEmail(), getOTP(), password).then((result)=>{
+                    if(result === true){
+                        navigate("/login")
+                    }
                 })
             }
             
@@ -51,6 +56,7 @@ const CreatePassword = () => {
                         </div>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
         </Fragment>
     );
