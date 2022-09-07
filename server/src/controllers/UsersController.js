@@ -1,4 +1,5 @@
 const UsersModel = require('../models/usersModel');
+const OTPModel = require('../models/OTPModel')
 const jwt = require('jsonwebtoken');
 const SendEmailUtility = require('../utilities/SendEmailUtility');
 

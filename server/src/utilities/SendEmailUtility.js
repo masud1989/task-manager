@@ -20,15 +20,14 @@ const SendEmailUtility= async (EmailTo, EmailText, EmailSubject) => {
         // auth: {
         //   user: 'mranasrj01@gmail.com',
         //   pass: 'A01011989a'
-        // },
-        // tls:{
-        //     rejectUnauthorized: false
-        // },
+        // },tls: {
+        //          rejectUnauthorized: false
+        //      }
     });
 
 
     let mailOptions = {
-        from: 'Task Manager MERN <info@teamrabbil.com>',
+        from: 'Task Manager MERN <mranasrj01@gmail.com>',
         to: EmailTo,
         subject: EmailSubject,
         text: EmailText
