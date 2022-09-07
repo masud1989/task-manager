@@ -1,9 +1,12 @@
 import React, { Fragment, useRef } from 'react';
 import { RecoverVerifyEmailRequest } from '../../apiRequest/apiRequest';
-import { ErrorToast, IsEmail } from "../../helper/FormHelper"
+import { ErrorToast, IsEmail } from "../../helper/FormHelper";
+import {useNavigate} from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 const SentOTP = () => {
 
+    const navigate = useNavigate()
     let emailRef = useRef();
 
     const VerifyEmail = () => {
@@ -13,7 +16,9 @@ const SentOTP = () => {
         }
         else{
             RecoverVerifyEmailRequest(email).then((result)=>{
-                
+                if(result === true){
+                    navigate('/verifyOTP')
+                }
             })
         }
     }
@@ -35,6 +40,7 @@ const SentOTP = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
         </div>
     </Fragment>
     );

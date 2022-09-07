@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ErrorToast, SuccessToast } from "../helper/FormHelper";
-import { getToken, setToken, setUserDetails } from "../helper/SessionHelper";
+import { getToken, setEmail, setToken, setUserDetails } from "../helper/SessionHelper";
 import { SetProfile } from "../redux/state-slice/profileSlice";
 import { HideLoader, ShowLoader } from "../redux/state-slice/settings-slice";
 import { SetSummary } from "../redux/state-slice/summary-slice";
@@ -246,12 +246,20 @@ export const ProfileUpdateRequest = (email, name, address, mobile, password, pho
 // Verify Email Request (Email)
 export const RecoverVerifyEmailRequest = (email) => {
     store.dispatch(ShowLoader())
-    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email;
+    let URL = BaseURL+"/recoverVerifyEmail/"+email;
     return axios.get(URL).then((res) => {
         store.dispatch(HideLoader())
         if(res.status === 200){
-            //Messages
-            return true;
+                           //Messages
+            if(res.data['status'] === 'fail'){
+                ErrorToast("Sorry! User is Not Found")
+                return false;
+            }
+            else{
+                setEmail(email)
+                SuccessToast("A 6 Digit OTP Code is sent to your email")
+                return true;
+            }
         }
         else{
             ErrorToast('Something Went Wrong')
@@ -268,12 +276,20 @@ export const RecoverVerifyEmailRequest = (email) => {
 // Verify Email Request (OTP)
 export const RecoverVerifyOTPRequest = (email,OTP) => {
     store.dispatch(ShowLoader())
-    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email+"/"+OTP;
+    let URL = BaseURL+"/recoverVerifyOTP/"+email+"/"+OTP;
     return axios.get(URL).then((res) => {
         store.dispatch(HideLoader())
         if(res.status === 200){
             //Messages
-            return true;
+            if(res.data['status'] === "fail"){
+                ErrorToast("User is Not Found")
+                return false;
+            }
+            else{
+                setEmail(email)
+                SuccessToast('A 6 Digit Verification Code is sent to your email')
+                return true;
+            }           
         }
         else{
             ErrorToast('Something Went Wrong')
@@ -292,7 +308,7 @@ export const RecoverResetPasswordRequest = (email,OTP,password) => {
     store.dispatch(ShowLoader())
 
 
-    let URL = BaseURL+"/RecoverVerifyEmailRequest/"+email+"/"+OTP;
+    let URL = BaseURL+"/recoverResetPass/"+email+"/"+OTP;
     let postBody = {email:email, OTP:OTP, password:password}
     return axios.post(URL, postBody).then((res) => {
         store.dispatch(HideLoader())
