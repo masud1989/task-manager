@@ -74,6 +74,7 @@ exports.profileDetails = (req, res) => {
     })
 }
 
+//Verify Email Request
 exports.recoverVerifyEmail = async (req,res) => {
     let email = req.params.email;
     let OTPCode = Math.floor(100000 + Math.random() * 900000)
@@ -96,6 +97,7 @@ exports.recoverVerifyEmail = async (req,res) => {
     }  
 }
 
+// Verify OTP Request
 exports.recoverVerifyOTP = async (req, res) => {
     let email = req.params.email;
     let OTPCode = req.params.otp;
@@ -120,6 +122,27 @@ exports.recoverVerifyOTP = async (req, res) => {
     } 
     
     catch (error) {
+        res.status(200).json({status: 'fail', data:error})
+    }
+}
+
+// Recover Reset Password Request
+exports.recoverResetPass = async (req, res) => {
+    let email = req.body['email'];
+    let OTPCode = req.body['otp'];
+    let newPassword = req.body['password'];
+    let updateStatus = 1;
+
+    try {
+        let OTPUsedCount = await OTPModel.aggregate([{$match:{email: email, otp:OTPCode, status:updateStatus}},{$count: "total"}])
+        if(OTPUsedCount.length>0){
+            let updatePassword = await UsersModel.updateOne({email:email}, {password: newPassword})
+            res.status(200).json({status: 'success', data:updatePassword})
+        }
+        else{
+            res.status(200).json({status: 'fail', data:"Invalid OTP Code"})
+        }
+    } catch (error) {
         res.status(200).json({status: 'fail', data:error})
     }
 }
