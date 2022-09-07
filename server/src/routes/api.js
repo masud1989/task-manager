@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registration, login, profileUpdate, profileDetails, recoverVerifyEmail } = require('../controllers/UsersController');
+const { registration, login, profileUpdate, profileDetails, recoverVerifyEmail, recoverVerifyOTP } = require('../controllers/UsersController');
 const { createTask, updateTaskStatus, taskListByStatus, taskStatusCount, deleteTask } = require('../controllers/TasksController');
 
 const AuthVerifyMiddleware = require('../middleware/AuthVerifyMiddleware');
@@ -16,6 +16,7 @@ router.post('/login', login);
 router.post('/profileUpdate', AuthVerifyMiddleware, profileUpdate);
 router.get('/profileDetails', AuthVerifyMiddleware, profileDetails);
 router.get('/recoverVerifyEmail/:email',  recoverVerifyEmail);
+router.get('/recoverVerifyOTP/:email/:otp',  recoverVerifyOTP);
 
 router.post('/createTask', AuthVerifyMiddleware, createTask);
 router.get('/deleteTask/:id', AuthVerifyMiddleware, deleteTask);

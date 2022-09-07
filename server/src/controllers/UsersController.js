@@ -90,12 +90,36 @@ exports.recoverVerifyEmail = async (req,res) => {
         else{
             res.status(200).json({status: 'fail', data:'User is Not Found'})
         }
-
-
-
-    
+ 
     } catch (error) {
         res.status(200).json({status: 'fail', data:error})
-    }
+    }  
+}
+
+exports.recoverVerifyOTP = async (req, res) => {
+    let email = req.params.email;
+    let OTPCode = req.params.otp;
+    let status = 0;
+    let updateStatus = 1;
+
+    try {
+        let OTPCount = await OTPModel.aggregate([{$match: {email: email, otp: OTPCode, status: status}}, {$count: "total"}])
+        // let OTPCount = await OTPModel.aggregate([{$match: {email: email, otp: OTPCode, status: status}}, {$count: "total"}])
+        if(OTPCount.length>0){
+            let OTPUpdate = await OTPModel.updateOne({email: email, otp: OTPCode, status: status},{
+            // let OTPUpdate = await OTPModel.updateOne({email: email, otp: OTPCode, status: status}, {
+                email: email,
+                otp:OTPCode, 
+                status:updateStatus
+            })
+            res.status(200).json({status: 'success', data:OTPUpdate})
+        }
+        else{
+            res.status(200).json({status: 'fail', data:"Invalid OTP Code"})
+        }
+    } 
     
+    catch (error) {
+        res.status(200).json({status: 'fail', data:error})
+    }
 }
