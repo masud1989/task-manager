@@ -7,7 +7,8 @@ import { SetSummary } from "../redux/state-slice/summary-slice";
 import { SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask } from "../redux/state-slice/task-slice";
 import store from "../redux/store/store";
 
-const BaseURL = 'http://localhost:5000/api/v1';
+// const BaseURL = 'http://localhost:5000/api/v1';
+const BaseURL = 'https://masud-task-manager.herokuapp.com/api/v1';
 const AxiosHeader = {headers:{"token":getToken()}}
 
 // Registration Request 

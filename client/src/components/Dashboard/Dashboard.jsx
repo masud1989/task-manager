@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import { SummaryRequest } from '../../apiRequest/apiRequest';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 const Dashboard = () => {
    
@@ -27,6 +28,7 @@ const Dashboard = () => {
                         )
                     }
                 </div>
+                <ToastContainer/>
             </div>
         </Fragment>
     );

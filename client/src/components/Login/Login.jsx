@@ -20,8 +20,8 @@ const Login = () => {
         else{
             LoginRequest(email,password).then((result)=>{
                 if(result === true){
-                    SuccessToast('Login Success')
                     window.location.href='/' 
+                    SuccessToast('Login Success')
                 }
             })
         }

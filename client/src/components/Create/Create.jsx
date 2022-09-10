@@ -44,7 +44,7 @@ const Create = () => {
                             {/* <input ref={input=>taskRef=input} className='form-control animated fadeInUp' type="text" placeholder='Task Name'  /> */}
                             <input ref={(input)=>titleRef=input} placeholder="Task Name" className="form-control animated fadeInUp" type="text"/>
                             <br />
-                            <textarea ref={(input)=> descriptionRef=input} className='form-control animated fadeInUp' type="text" rows={5} placeholder='Task Name'  />
+                            <textarea ref={(input)=> descriptionRef=input} className='form-control animated fadeInUp' type="text" rows={5} placeholder='Task Description'  />
                             {/* <textarea ref={(input)=>descriptionRef=input} rows={5} placeholder="Task Description" className="form-control animated fadeInUp" type="text"/> */}
                             <button 
                                 className='btn btn-primary float-start mt-5'
