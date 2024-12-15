@@ -18,8 +18,8 @@ const SendEmailUtility= async (EmailTo, EmailText, EmailSubject) => {
         // host: 'smtp.gmail.com',
         // secure: false,
         // auth: {
-        //   user: 'mranasrj01@gmail.com',
-        //   pass: 'A01011989a'
+        //   user: 'gmail',
+        //   pass: 'Pass65555'
         // },tls: {
         //          rejectUnauthorized: false
         //      }
